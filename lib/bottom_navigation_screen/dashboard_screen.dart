@@ -18,32 +18,32 @@ class _DashboardScreenState extends State<DashboardScreen> {
   ];
 
   final List<Map<String, dynamic>> featuredDonors = [
-    // {
-    //   "name": "John Doe",
-    //   "location": "Kathmandu",
-    //   "image": "assets/images/donors/john_doe.jpg",
-    // },
-    // {
-    //   "name": "Anita Sharma",
-    //   "location": "Lalitpur",
-    //   "image": "assets/images/donors/anita_sharma.jpg",
-    // },
+    {
+      "name": "John Doe",
+      "location": "Kathmandu",
+      "image": 'assets/images/users/boy.png',
+    },
+    {
+      "name": "Anita Sharma",
+      "location": "Lalitpur",
+      "image": 'assets/images/users/girl.png',
+    },
   ];
 
   List<Widget> get pages => [
     homePage(),
-    Center(
-      child: Text(
-        "Favorites Page",
-        style: TextStyle(fontSize: 24, color: Colors.white),
-      ),
-    ),
-    Center(
-      child: Text(
-        "Requests Page",
-        style: TextStyle(fontSize: 24, color: Colors.white),
-      ),
-    ),
+    // Center(
+    //   child: Text(
+    //     "Favorites Page",
+    //     style: TextStyle(fontSize: 24, color: Colors.white),
+    //   ),
+    // ),
+    // Center(
+    //   child: Text(
+    //     "Requests Page",
+    //     style: TextStyle(fontSize: 24, color: Colors.white),
+    //   ),
+    // ),
     Center(
       child: Text(
         "Profile Page",
@@ -92,7 +92,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
         ),
         title: Row(
           children: [
-            Image.asset('assets/banner2.jpg', height: 38),
+            Image.asset('assets/images/banner2.jpg', height: 38),
             const SizedBox(width: 10),
             const Text(
               'BloodBank',
@@ -118,14 +118,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
         },
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-          // BottomNavigationBarItem(
-          //   icon: Icon(Icons.favorite),
-          //   label: "Favorites",
-          // ),
-          // BottomNavigationBarItem(
-          //   icon: Icon(Icons.add_alert),
-          //   label: "Requests",
-          // ),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
         ],
       ),
@@ -149,7 +141,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
         ClipRRect(
           borderRadius: BorderRadius.circular(16),
           child: Image.asset(
-            'assets/banner1.jpg',
+            'assets/images/banner1.jpg',
             height: 160,
             width: double.infinity,
             fit: BoxFit.cover,

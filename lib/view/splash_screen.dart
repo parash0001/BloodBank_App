@@ -31,7 +31,7 @@ class _SplashScreenState extends State<SplashScreen> {
           children: [
             // Using banner1.jpg as a logo substitute
             Image.asset(
-              'assets/banner1.jpg',
+              'assets/images/banner1.jpg',
               height: 120,
               errorBuilder:
                   (context, error, stackTrace) =>

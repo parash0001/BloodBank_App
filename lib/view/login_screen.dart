@@ -21,12 +21,9 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   void initState() {
     super.initState();
-
-    // Reset errors as user types
     emailController.addListener(() {
       if (emailError != null) resetValidation();
     });
-
     passwordController.addListener(() {
       if (passwordError != null) resetValidation();
     });
@@ -59,7 +56,6 @@ class _LoginScreenState extends State<LoginScreen> {
         passwordError = 'Password must be at least 6 characters';
         isPasswordValid = false;
       } else if (password != '123456') {
-        // Hardcoded password for demo purposes
         passwordError = 'Invalid password';
         isPasswordValid = false;
       } else {
@@ -71,7 +67,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void onLoginPressed() {
     validateFormOnLogin();
-
     if (emailError == null && isPasswordValid == true) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -85,7 +80,6 @@ class _LoginScreenState extends State<LoginScreen> {
           duration: const Duration(milliseconds: 800),
         ),
       );
-
       Navigator.pushReplacementNamed(context, '/dashboard');
       resetValidation();
     } else {
@@ -144,7 +138,6 @@ class _LoginScreenState extends State<LoginScreen> {
         resetValidation();
       },
       child: Scaffold(
-        backgroundColor: const Color(0xFFFFCDD2),
         body: SafeArea(
           child: Column(
             children: [
@@ -152,7 +145,7 @@ class _LoginScreenState extends State<LoginScreen> {
               Column(
                 children: [
                   Image.asset(
-                    'assets/banner2.jpg',
+                    'assets/images/banner2.jpg',
                     height: 38,
                     errorBuilder:
                         (context, error, stackTrace) =>
@@ -162,9 +155,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   const Text(
                     "BloodBank",
                     style: TextStyle(
-                      color: Colors.white,
+                      color: Colors.black,
                       fontSize: 26,
                       fontWeight: FontWeight.bold,
+                      fontFamily: 'Opensans Bold',
                     ),
                   ),
                 ],
@@ -183,11 +177,16 @@ class _LoginScreenState extends State<LoginScreen> {
                     children: [
                       TextField(
                         controller: emailController,
-                        onTap: resetValidation,
-                        style: const TextStyle(fontSize: 16),
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontFamily: 'Opensans Regular',
+                        ),
                         decoration: InputDecoration(
                           hintText: 'Email',
-                          hintStyle: const TextStyle(fontSize: 16),
+                          hintStyle: const TextStyle(
+                            fontSize: 16,
+                            fontFamily: 'Opensans Regular',
+                          ),
                           prefixIcon: const Icon(Icons.email_outlined),
                           filled: true,
                           fillColor: Colors.grey[100],
@@ -202,10 +201,16 @@ class _LoginScreenState extends State<LoginScreen> {
                       TextField(
                         controller: passwordController,
                         obscureText: !isPasswordVisible,
-                        style: const TextStyle(fontSize: 16),
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontFamily: 'Opensans Regular',
+                        ),
                         decoration: InputDecoration(
                           hintText: 'Password',
-                          hintStyle: const TextStyle(fontSize: 16),
+                          hintStyle: const TextStyle(
+                            fontSize: 16,
+                            fontFamily: 'Opensans Regular',
+                          ),
                           prefixIcon: const Icon(Icons.lock_outline),
                           suffixIcon: Row(
                             mainAxisSize: MainAxisSize.min,
@@ -233,14 +238,12 @@ class _LoginScreenState extends State<LoginScreen> {
                           errorText: passwordError,
                         ),
                       ),
-
                       const SizedBox(height: 12),
                       Align(
                         alignment: Alignment.centerRight,
                         child: TextButton(
                           onPressed: () {
                             resetValidation();
-                            // Add forgot password functionality here if needed
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
                                 content: Text("Forgot password clicked"),
@@ -250,14 +253,16 @@ class _LoginScreenState extends State<LoginScreen> {
                           },
                           child: const Text(
                             'Forgot password?',
-                            style: TextStyle(fontSize: 14),
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontFamily: 'Opensans Regular',
+                            ),
                           ),
                         ),
                       ),
                       ElevatedButton(
                         onPressed: onLoginPressed,
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFFFFCDD2),
                           minimumSize: const Size(double.infinity, 52),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12),
@@ -267,8 +272,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           "Login",
                           style: TextStyle(
                             fontSize: 16,
-                            color: Colors.white,
                             fontWeight: FontWeight.bold,
+                            fontFamily: 'Opensans Bold',
                           ),
                         ),
                       ),
@@ -278,7 +283,13 @@ class _LoginScreenState extends State<LoginScreen> {
                           Expanded(child: Divider()),
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 8),
-                            child: Text("or", style: TextStyle(fontSize: 14)),
+                            child: Text(
+                              "or",
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontFamily: 'Opensans Regular',
+                              ),
+                            ),
                           ),
                           Expanded(child: Divider()),
                         ],
@@ -286,7 +297,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       const SizedBox(height: 16),
                       OutlinedButton.icon(
                         onPressed: () {
-                          // Implement Google sign-in here
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
                               content: Text("Google sign-in pressed"),
@@ -294,10 +304,16 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           );
                         },
-                        icon: Image.asset('assets/google_logo.png', height: 22),
+                        icon: Image.asset(
+                          'assets/images/google_logo.png',
+                          height: 22,
+                        ),
                         label: const Text(
                           "Continue with Google",
-                          style: TextStyle(fontSize: 16),
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontFamily: 'Opensans Regular',
+                          ),
                         ),
                         style: OutlinedButton.styleFrom(
                           minimumSize: const Size(double.infinity, 52),
@@ -320,7 +336,11 @@ class _LoginScreenState extends State<LoginScreen> {
                 },
                 child: const Text(
                   "Don't have an account? Sign up",
-                  style: TextStyle(color: Colors.white, fontSize: 15),
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 15,
+                    fontFamily: 'Opensans Regular',
+                  ),
                 ),
               ),
               const SizedBox(height: 10),

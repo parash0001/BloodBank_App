@@ -103,7 +103,7 @@ class _SignupScreenState extends State<SignupScreen> {
               Column(
                 children: [
                   Image.asset(
-                    'assets/banner1.jpg', // Using your asset here
+                    'assets/images/banner1.jpg',
                     height: 80,
                     errorBuilder:
                         (context, error, stackTrace) =>
@@ -113,6 +113,7 @@ class _SignupScreenState extends State<SignupScreen> {
                   const Text(
                     "BloodBank",
                     style: TextStyle(
+                      fontFamily: 'Montserrat',
                       color: Colors.white,
                       fontSize: 26,
                       fontWeight: FontWeight.bold,
@@ -135,6 +136,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         child: Text(
                           "Sign Up",
                           style: TextStyle(
+                            fontFamily: 'Montserrat',
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
                             color: Colors.black,
@@ -205,6 +207,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           child: const Text(
                             "Sign Up",
                             style: TextStyle(
+                              fontFamily: 'OpenSans',
                               fontSize: 16,
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
@@ -213,34 +216,13 @@ class _SignupScreenState extends State<SignupScreen> {
                         ),
                       ),
                       const SizedBox(height: 20),
-                      // Optional: You can remove Google sign up if you don't have assets for it
-                      /*
-                      OutlinedButton.icon(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => const LoginScreen()),
-                          );
-                          resetValidation();
-                        },
-                        icon: Image.asset(
-                          'assets/images/google_logo.png',
-                          height: 20,
-                        ),
-                        label: const Text("Sign up with Google", style: TextStyle(fontSize: 16)),
-                        style: OutlinedButton.styleFrom(
-                          minimumSize: const Size(double.infinity, 52),
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
-                          side: const BorderSide(color: Colors.black12),
-                          backgroundColor: Colors.white,
-                        ),
-                      ),
-                      const SizedBox(height: 24),
-                      */
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Text("Already have an account? "),
+                          const Text(
+                            "Already have an account? ",
+                            style: TextStyle(fontFamily: 'OpenSans'),
+                          ),
                           GestureDetector(
                             onTap: () {
                               resetValidation();
@@ -249,6 +231,7 @@ class _SignupScreenState extends State<SignupScreen> {
                             child: const Text(
                               "Log in",
                               style: TextStyle(
+                                fontFamily: 'OpenSans',
                                 fontWeight: FontWeight.bold,
                                 color: Color(0xFFFFCDD2),
                               ),
@@ -279,8 +262,10 @@ class _SignupScreenState extends State<SignupScreen> {
     return TextField(
       controller: controller,
       obscureText: obscureText,
+      style: const TextStyle(fontFamily: 'OpenSans'),
       decoration: InputDecoration(
         hintText: hintText,
+        hintStyle: const TextStyle(fontFamily: 'OpenSans'),
         prefixIcon: Icon(icon),
         suffixIcon:
             suffixIcon != null
