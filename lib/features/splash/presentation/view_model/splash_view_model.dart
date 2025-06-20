@@ -1,28 +1,16 @@
+// path: features/splash/presentation/view_model/splash_view_model.dart
+
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:student_management/app/service_locator/service_locator.dart';
-import 'package:student_management/features/auth/presentation/view/login_view.dart';
-import 'package:student_management/features/auth/presentation/view_model/login_view_model/login_view_model.dart';
+import 'package:bloodbank/features/splash/domain/use_case/next_pate_navigate_use_case.dart';
 
-class SplashViewModel extends Cubit<void> {
-  SplashViewModel() : super(null);
+class SplashViewModel extends ChangeNotifier {
+  final NextPageNavigateUseCase useCase;
 
-  // Open Login View after 2 seconds
-  Future<void> init(BuildContext context) async {
-    await Future.delayed(const Duration(seconds: 2), () async {
-      // Open Login page or Onboarding Screen
+  SplashViewModel(this.useCase);
 
-      if (context.mounted) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => BlocProvider.value(
-              value: serviceLocator<LoginViewModel>(),
-              child: LoginView(),
-            ),
-          ),
-        );
-      }
+  void navigateToNextScreen(BuildContext context) {
+    useCase.waitAndNavigate((route) {
+      Navigator.pushReplacementNamed(context, route);
     });
   }
 }

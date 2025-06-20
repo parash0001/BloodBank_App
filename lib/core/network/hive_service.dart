@@ -7,7 +7,7 @@ import 'package:path_provider/path_provider.dart';
 class HiveService {
   Future<void> init() async {
     var directory = await getApplicationDocumentsDirectory();
-    var path = '${directory.path}ghar_sewa.db';
+    var path = '${directory.path}bloodbank.db';
 
     Hive.init(path);
 

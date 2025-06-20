@@ -1,16 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:student_management/features/splash/presentation/view_model/splash_view_model.dart';
+import 'package:provider/provider.dart';
 
-class SplashView extends StatelessWidget {
+import '../view_model/splash_view_model.dart';
+
+class SplashView extends StatefulWidget {
   const SplashView({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    // Call the ViewModel and load Login View after 2 seconds
+  State<SplashView> createState() => _SplashViewState();
+}
+
+class _SplashViewState extends State<SplashView> {
+  @override
+  void initState() {
+    super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<SplashViewModel>().init(context);
+      // Use the ViewModel's logic
+      context.read<SplashViewModel>().navigateToNextScreen(context);
     });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: [
@@ -38,7 +49,7 @@ class SplashView extends StatelessWidget {
             bottom: 10,
             left: MediaQuery.of(context).size.width / 4,
             child: const Text(
-              'Developed by: Khatra Sir le',
+              'Developed by: Parash Mainali',
               style: TextStyle(fontSize: 15),
             ),
           ),
