@@ -4,7 +4,7 @@ import 'package:equatable/equatable.dart';
 import 'package:hive/hive.dart';
 import 'package:uuid/uuid.dart';
 
-part 'hive_login_model.g.dart';
+part 'login_hive_model.g.dart';
 
 @HiveType(typeId: HiveTableConstant.loginTableId)
 class LoginHiveModel extends Equatable {

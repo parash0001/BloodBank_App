@@ -3,7 +3,7 @@ import 'package:bloodbank/core/error/failure.dart';
 import 'package:bloodbank/features/login/data/data_source/local_datasource/login_local_datasource.dart';
 import 'package:bloodbank/features/login/domain/entity/login_entity.dart';
 import 'package:bloodbank/features/login/domain/repository/login_repository.dart';
-import 'package:bloodbank/features/login/data/model/hive_login_model.dart';
+import 'package:bloodbank/features/login/data/model/login_hive_model.dart';
 
 class LoginLocalRepository implements ILoginRepository {
   final ILoginLocalDataSource loginLocalDataSource;

@@ -1,12 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:student_management/app/service_locator/service_locator.dart';
-import 'package:student_management/features/batch/presentation/view/batch_view.dart';
-import 'package:student_management/features/batch/presentation/view_model/batch_view_model.dart';
-import 'package:student_management/features/course/presentation/view/course_view.dart';
-import 'package:student_management/features/course/presentation/view_model/course_view_model.dart';
-import 'package:student_management/features/home/presentation/view/bottom_view/account_view.dart';
-import 'package:student_management/features/home/presentation/view/bottom_view/dashboard_view.dart';
 
 class HomeState {
   final int selectedIndex;
@@ -14,21 +6,14 @@ class HomeState {
 
   const HomeState({required this.selectedIndex, required this.views});
 
-  // Initial state
-  static HomeState initial() {
+  factory HomeState.initial() {
     return HomeState(
       selectedIndex: 0,
-      views: [
-        DashboardView(),
-        BlocProvider.value(
-          value: serviceLocator<CourseViewModel>(),
-          child: CourseView(),
-        ),
-        BlocProvider.value(
-          value: serviceLocator<BatchViewModel>(),
-          child: BatchView(),
-        ),
-        AccountView(),
+      views: const [
+        Center(child: Text('Dashboard')),
+        Center(child: Text('Donors')),
+        Center(child: Text('Requests')),
+        Center(child: Text('Profile')),
       ],
     );
   }
