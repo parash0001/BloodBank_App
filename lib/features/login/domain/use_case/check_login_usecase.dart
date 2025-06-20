@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
-import 'package:ghar_sewa/core/error/failure.dart';
-import 'package:ghar_sewa/features/login/domain/entity/login_entity.dart';
-import 'package:ghar_sewa/features/login/domain/repository/login_repository.dart';
-import 'package:ghar_sewa/app/use_case/usecase.dart';
+import 'package:bloodbank/core/error/failure.dart';
+import 'package:bloodbank/features/login/domain/entity/login_entity.dart';
+import 'package:bloodbank/features/login/domain/repository/login_repository.dart';
+import 'package:bloodbank/app/use_case/usecase.dart';
 
 class CheckLoginParams {
   final String email;
