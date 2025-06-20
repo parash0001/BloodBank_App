@@ -1,6 +1,6 @@
 import 'package:bloodbank/core/error/failure.dart';
 import 'package:bloodbank/core/network/hive_service.dart';
-import 'package:bloodbank/features/login/data/model/login_hive_model.dart';
+import 'package:bloodbank/features/login/data/model/hive_login_model.dart';
 
 abstract interface class ILoginLocalDataSource {
   Future<bool> checkLogin(LoginHiveModel login);

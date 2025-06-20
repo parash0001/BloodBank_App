@@ -1,5 +1,5 @@
 import 'package:bloodbank/app/constant/hive/hive_table_constant.dart';
-import 'package:bloodbank/features/login/data/model/login_hive_model.dart';
+import 'package:bloodbank/features/login/data/model/hive_login_model.dart';
 import 'package:bloodbank/features/register/data/model/register_hive_model.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';

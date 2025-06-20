@@ -1,7 +1,7 @@
+import 'package:bloodbank/features/login/domain/use_case/check_login_usecase.dart';
+import 'package:bloodbank/features/login/presentation/view_model/login_event.dart';
+import 'package:bloodbank/features/login/presentation/view_model/login_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ghar_sewa/features/login/domain/use_case/check_login_usecase.dart';
-import 'package:ghar_sewa/features/login/presentation/view_model/login_event.dart';
-import 'package:ghar_sewa/features/login/presentation/view_model/login_state.dart';
 
 class LoginViewModel extends Bloc<LoginEvent, LoginState> {
   final CheckLoginUsecase checkLoginUsecase;
@@ -16,9 +16,11 @@ class LoginViewModel extends Bloc<LoginEvent, LoginState> {
     Emitter<LoginState> emit,
   ) async {
     emit(state.copyWith(isLoading: true));
+
     final result = await checkLoginUsecase(
       CheckLoginParams(email: event.email, password: event.password),
     );
+
     result.fold(
       (failure) => emit(
         state.copyWith(

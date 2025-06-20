@@ -1,12 +1,10 @@
-
-
+import 'package:bloodbank/app/constant/hive/hive_table_constant.dart';
+import 'package:bloodbank/features/login/domain/entity/login_entity.dart';
 import 'package:equatable/equatable.dart';
 import 'package:hive/hive.dart';
 import 'package:uuid/uuid.dart';
-import 'package:bloodbank/app/constant/hive/hive_table_constant.dart';
-import 'package:bloodbank/features/login/domain/entity/login_entity.dart';
 
-part 'login_hive_model.g.dart';
+part 'hive_login_model.g.dart';
 
 @HiveType(typeId: HiveTableConstant.loginTableId)
 class LoginHiveModel extends Equatable {
