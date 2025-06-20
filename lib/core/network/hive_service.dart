@@ -1,132 +1,72 @@
-import 'package:hive_flutter/hive_flutter.dart';
+import 'package:bloodbank/app/constant/hive/hive_table_constant.dart';
+import 'package:bloodbank/features/login/data/model/login_hive_model.dart';
+import 'package:bloodbank/features/register/data/model/register_hive_model.dart';
+import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:student_management/app/constant/hive_table_constant.dart';
-import 'package:student_management/features/auth/data/model/student_hive_model.dart';
-import 'package:student_management/features/batch/data/model/batch_hive_model.dart';
-import 'package:student_management/features/course/data/model/course_hive_model.dart';
 
 class HiveService {
   Future<void> init() async {
-    // Initialize the database
     var directory = await getApplicationDocumentsDirectory();
-    var path = '${directory.path}student_management.db';
+    var path = '${directory.path}ghar_sewa.db';
 
     Hive.init(path);
 
-    // Register Adapters
-    Hive.registerAdapter(CourseHiveModelAdapter());
-    Hive.registerAdapter(BatchHiveModelAdapter());
-    Hive.registerAdapter(StudentHiveModelAdapter());
+    Hive.registerAdapter(RegisterHiveModelAdapter());
+    Hive.registerAdapter(LoginHiveModelAdapter());
+    //queries
+    // Future<void> addRegister(RegisterEntity register) async {
+    //   var box = await Hive.openBox(HiveTableConstant.registerBox);
+    //   await box.add(register);
 
-    // Add Dummy Data
-    // await addBatchData();
-    // await addCourseData();
-
-    // clearAll();
+    // }
   }
 
-  // Add Dummy data for batch and course
-  Future<void> addBatchData() async {
-    final batch1 = BatchHiveModel(batchName: '34-A');
-    final batch2 = BatchHiveModel(batchName: '34-B');
-    final batch3 = BatchHiveModel(batchName: '34-C');
-
-    await addBatch(batch1);
-    await addBatch(batch2);
-    await addBatch(batch3);
-  }
-
-  Future<void> addCourseData() async {
-    final course1 = CourseHiveModel(courseName: 'Flutter');
-    final course2 = CourseHiveModel(courseName: 'Dart');
-    final course3 = CourseHiveModel(courseName: 'Java');
-
-    await addCourse(course1);
-    await addCourse(course2);
-    await addCourse(course3);
-  }
-
-  // Batch Queries
-  Future<void> addBatch(BatchHiveModel batch) async {
-    // Check if the batch already exists
-    var box = await Hive.openBox<BatchHiveModel>(HiveTableConstant.batchBox);
-
-    await box.put(batch.batchId, batch);
-  }
-
-  Future<void> deleteBatch(String id) async {
-    var box = await Hive.openBox<BatchHiveModel>(HiveTableConstant.batchBox);
-    await box.delete(id);
-  }
-
-  Future<List<BatchHiveModel>> getAllBatches() async {
-    // Sort by BatchName
-    var box = await Hive.openBox<BatchHiveModel>(HiveTableConstant.batchBox);
-    return box.values.toList()
-      ..sort((a, b) => a.batchName.compareTo(b.batchName));
-  }
-
-  // Course Queries
-  Future<void> addCourse(CourseHiveModel course) async {
-    var box = await Hive.openBox<CourseHiveModel>(HiveTableConstant.courseBox);
-
-    await box.put(course.courseId, course);
-  }
-
-  Future<void> deleteCourse(String id) async {
-    var box = await Hive.openBox<CourseHiveModel>(HiveTableConstant.courseBox);
-    await box.delete(id);
-  }
-
-  Future<List<CourseHiveModel>> getAllCourses() async {
-    var box = await Hive.openBox<CourseHiveModel>(HiveTableConstant.courseBox);
-    return box.values.toList();
-  }
-
-  // Auth Queries
-  Future<void> register(StudentHiveModel auth) async {
-    var box = await Hive.openBox<StudentHiveModel>(
-      HiveTableConstant.studentBox,
+  Future<void> addRegister(RegisterHiveModel register) async {
+    // Implement logic to add the register to Hive box
+    final box = await Hive.openBox<RegisterHiveModel>(
+      HiveTableConstant.registerBox,
     );
-    await box.put(auth.studentId, auth);
+    await box.add(register);
   }
 
-  Future<void> deleteAuth(String id) async {
-    var box = await Hive.openBox<StudentHiveModel>(
-      HiveTableConstant.studentBox,
+  // Future<bool> checkLogin(LoginHiveModel login) async {
+  //   final box = await Hive.openBox<LoginHiveModel>(
+  //     HiveTableConstant.loginBox,
+  //   );
+
+  //   // Get all stored login records
+  //   final allLogins = box.values.toList();
+
+  //   // Check if any stored login matches the provided email and password
+  //   return allLogins.any((storedLogin) =>
+  //     storedLogin.email == login.email &&
+  //     storedLogin.password == login.password
+  //   );
+  // }
+
+  Future<bool> checkLogin(LoginHiveModel login) async {
+    final box = await Hive.openBox<RegisterHiveModel>(
+      HiveTableConstant.registerBox,
     );
-    await box.delete(id);
-  }
 
-  Future<List<StudentHiveModel>> getAllAuth() async {
-    var box = await Hive.openBox<StudentHiveModel>(
-      HiveTableConstant.studentBox,
+    return box.values.any(
+      (stored) =>
+          stored.email == login.email && stored.password == login.password,
     );
-    return box.values.toList();
   }
 
-  // Login using username and password
-  Future<StudentHiveModel?> login(String username, String password) async {
-    var box = await Hive.openBox<StudentHiveModel>(
-      HiveTableConstant.studentBox,
-    );
-    var student = box.values.firstWhere(
-      (element) => element.username == username && element.password == password,
-      orElse: () => throw Exception('Invalid username or password'),
-    );
-    box.close();
-    return student;
+  Future<void> saveLoggedInUserEmail(String email) async {
+    final box = await Hive.openBox('authBox');
+    await box.put('loggedInEmail', email);
   }
 
-  // Clear all data and delete database
-  Future<void> clearAll() async {
-    await Hive.deleteFromDisk();
-    await Hive.deleteBoxFromDisk(HiveTableConstant.batchBox);
-    await Hive.deleteBoxFromDisk(HiveTableConstant.courseBox);
-    await Hive.deleteBoxFromDisk(HiveTableConstant.studentBox);
+  Future<String?> getLoggedInUserEmail() async {
+    final box = await Hive.openBox('authBox');
+    return box.get('loggedInEmail');
   }
 
-  Future<void> close() async {
-    await Hive.close();
+  Future<void> logoutUser() async {
+    final box = await Hive.openBox('authBox');
+    await box.delete('loggedInEmail');
   }
 }
