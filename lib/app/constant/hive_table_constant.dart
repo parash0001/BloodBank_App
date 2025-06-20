@@ -1,12 +1,10 @@
-class HiveTableConstant {
-  HiveTableConstant._();
+import 'package:dartz/dartz.dart';
+import 'package:bloodbank/core/error/failure.dart';
 
-  static const int studentTableId = 0;
-  static const String studentBox = 'studentBox';
+abstract interface class UsecaseWithParams<SuccessType, Params> {
+  Future<Either<Failure, SuccessType>> call(Params params);
+}
 
-  static const int batchTableId = 1;
-  static const String batchBox = 'batchBox';
-
-  static const int courseTableId = 2;
-  static const String courseBox = 'courseBox';
+abstract interface class UsecaseWithoutParams<SuccessType> {
+  Future<Either<Failure, SuccessType>> call();
 }
